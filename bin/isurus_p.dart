@@ -1,31 +1,60 @@
 import 'dart:io';
 
 void main() {
-  int trend =  int.parse(stdin.readLineSync()!);
-  int obj = int.parse(stdin.readLineSync()!);
+  int x = 0;
+  int y = 0;
+  String op = "";
+
+  String? entrada = stdin.readLineSync();
+  if(entrada != null)
+  {
+    if(entrada != "")
+    {
+      x = int.parse(entrada);
+    }
+  }
+
+  /*
+  x =  int.parse(stdin.readLineSync()!);
+  y = int.parse(stdin.readLineSync()!);
+  op = stdin.readLineSync()!;
+  */
 
   void sum()
   {
-    print(trend + obj);    
+    print(x + y);    
   }
   
   void sub()
   {
-    print(trend - obj);    
+    print(x - y);    
   }
 
   void mult()
   {
-    print(trend * obj);    
+    print(x * y);    
   }
 
   void div()
   {
-    print(trend / obj);    
+    print(x / y);    
   }
 
-  sum();
-  sub();
-  mult();
-  div();
+  if (op == "+")
+  {
+    sum();
+  }
+
+  switch (op)
+  {
+    case "+":
+    sum();
+    case "-":
+    sub();
+    case "*":
+    mult();
+    case "/":
+    div();
+    break;
+  }
 }
