@@ -14,7 +14,7 @@ O código é organizado em uma estrutura de pastas clara:
 * **`core/`** (opcional): Lógica compartilhada como tratamento de erros.
 * **`injection_container.dart`**: Para injeção de dependência.
 
-## Princípios de POO e S.O.L.I.D.
+## Princípios de POO
 
 O projeto aplica ativamente encapsulamento, abstração, herança, polimorfismo e os cinco princípios S.O.L.I.D. para garantir um código limpo e de fácil manutenção.
 
@@ -39,14 +39,8 @@ Autenticação, home com destaques/categorias, player de vídeo, busca, detalhes
 * **Injeção de Dependência**: `get_it`.
 * Outros pacotes para tratamento de resultados, player de vídeo, armazenamento local, etc.
 
-## 🤝 Contribuições
+## Contribuições
 
 São bem-vindas, seguindo o fluxo padrão de Fork, Branch, Commit, Push e Pull Request.
 
 ## Licença
-
-MIT (ver arquivo `LICENSE`).
-
----
-
-*Este é um resumo do README principal do projeto.*
