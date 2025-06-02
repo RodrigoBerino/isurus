@@ -4,21 +4,7 @@ void main() {
   int x = 0;
   int y = 0;
   String op = "";
-
-  String? entrada = stdin.readLineSync();
-  if(entrada != null)
-  {
-    if(entrada != "")
-    {
-      x = int.parse(entrada);
-    }
-  }
-
-  /*
-  x =  int.parse(stdin.readLineSync()!);
-  y = int.parse(stdin.readLineSync()!);
-  op = stdin.readLineSync()!;
-  */
+  List<String> operacao = <String>["+", "-", "*", "/"]; 
 
   void sum()
   {
@@ -40,11 +26,7 @@ void main() {
     print(x / y);    
   }
 
-  if (op == "+")
-  {
-    sum();
-  }
-
+  void calcular(){
   switch (op)
   {
     case "+":
@@ -57,4 +39,45 @@ void main() {
     div();
     break;
   }
+  }
+
+  void getop()
+  {
+
+  } 
+
+  print("Digite 1 valor:");
+  String? entrada = stdin.readLineSync();
+  if(entrada != null)
+  {
+    if(entrada != "")
+    {
+      x = int.parse(entrada);
+    }
+  }
+
+  print("Digite 1 op:");
+
+  entrada = stdin.readLineSync();
+  if (entrada != null)
+  {
+    op = entrada;
+  }
+
+  print("Digite 2 valor:");
+  entrada = stdin.readLineSync();
+  if(entrada != null)
+  {
+    if(entrada != "")
+    {
+      y = int.parse(entrada);
+    }
+  }
+
+  /*
+  x =  int.parse(stdin.readLineSync()!);
+  y = int.parse(stdin.readLineSync()!);
+  op = stdin.readLineSync()!;
+  */
+
 }
