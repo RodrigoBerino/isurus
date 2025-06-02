@@ -1,1 +1,3 @@
-# isurus
+# project
+
+A new Flutter project.
