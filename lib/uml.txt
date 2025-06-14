@@ -1,0 +1,179 @@
+@startuml
+allowmixing
+title Diagrama de Classes para Aplicativo Bancário + Banco de Dados
+
+skinparam classAttributeIconSize 0
+hide empty members
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam linetype ortho
+
+' Classes auxiliares
+class UUID
+class Date
+class DateTime
+class List
+
+' === CLASSES DO SISTEMA ===
+class Bank {
+  - bankName: String
+  - branchCode: String
+  + addCustomer(customer: Customer): void
+  + createAccount(customer: Customer, type: AccountType): Account
+}
+
+class Customer {
+  - customerId: UUID
+  - name: String
+  - document: String
+  - address: String
+  - email: String
+  - passwordHash: String
+  + login(email: String, password: String): boolean
+  + updateProfile(): void
+  + viewAccounts(): List
+}
+
+abstract class Account {
+  # accountNumber: String
+  # balance: double
+  # openDate: Date
+  # status: AccountStatus
+  + deposit(amount: double): void
+  + withdraw(amount: double): void
+  + transfer(toAccount: Account, amount: double): void
+  + getBalance(): double
+  + getStatement(): List
+}
+
+class CheckingAccount extends Account {
+  - overdraftLimit: double
+}
+
+class SavingsAccount extends Account {
+  - interestRate: float
+  + applyInterest(): void
+}
+
+class Transaction {
+  - transactionId: UUID
+  - date: DateTime
+  - amount: double
+  - type: TransactionType
+  - description: String
+}
+
+class Card {
+  - cardNumber: String
+  - expirationDate: String
+  - cvv: String
+  - cardType: CardType
+  - status: CardStatus
+  + activate(): void
+  + block(): void
+}
+
+class Loan {
+  - loanId: UUID
+  - principalAmount: double
+  - interestRate: float
+  - termMonths: int
+  - outstandingBalance: double
+  + makePayment(amount: double): void
+}
+
+' === ENTIDADES DO BANCO DE DADOS ===
+class "tbl_customers" <<entity>> {
+  + id: UUID
+  + name: String
+  + document: String
+  + email: String
+  + address: String
+  + password_hash: String
+}
+
+class "tbl_accounts" <<entity>> {
+  + id: String
+  + customer_id: UUID
+  + balance: double
+  + open_date: Date
+  + status: String
+  + type: String
+}
+
+class "tbl_transactions" <<entity>> {
+  + id: UUID
+  + account_id: String
+  + date: DateTime
+  + amount: double
+  + type: String
+  + description: String
+}
+
+class "tbl_cards" <<entity>> {
+  + id: String
+  + account_id: String
+  + customer_id: UUID
+  + expiration_date: String
+  + cvv: String
+  + card_type: String
+  + status: String
+}
+
+class "tbl_loans" <<entity>> {
+  + id: UUID
+  + customer_id: UUID
+  + principal_amount: double
+  + interest_rate: float
+  + term_months: int
+  + outstanding_balance: double
+}
+
+' === ENUMS ===
+enum AccountStatus {
+  ACTIVE
+  CLOSED
+  FROZEN
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
+  PAYMENT
+}
+
+enum CardType {
+  DEBIT
+  CREDIT
+  MULTIPLE
+}
+
+enum CardStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+' === RELACIONAMENTOS ENTRE CLASSES ===
+Bank "1" *-- "1..*" Customer : "gerencia"
+Customer "1" *-- "1..*" Account : "possui"
+Account "1" *-- "0..*" Transaction : "registra"
+Account <|-- CheckingAccount
+Account <|-- SavingsAccount
+Customer "1" -- "0..*" Card : "titular de"
+Card "1" -- "1" Account : "vinculado a"
+Customer "1" -- "0..*" Loan : "contrata"
+Account --> AccountStatus
+Transaction --> TransactionType
+Card --> CardType
+Card --> CardStatus
+
+' === RELACIONAMENTOS COM O BANCO DE DADOS ===
+Customer ..> "tbl_customers" : persiste em
+Account ..> "tbl_accounts" : persiste em
+Transaction ..> "tbl_transactions" : persiste em
+Card ..> "tbl_cards" : persiste em
+Loan ..> "tbl_loans" : persiste em
+
+@enduml
