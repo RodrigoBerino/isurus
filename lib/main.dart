@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'views/home_view.dart';
-import 'core/theme/app_theme.dart';
-
 void main() {
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp();
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Isurus',
-      theme: AppTheme.lightTheme,
-      home: const HomeView(),
-      debugShowCheckedModeBanner: false,
+    return const MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('Hello World'),
+        ),
+      ),
     );
   }
 }
