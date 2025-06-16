@@ -1,7 +1,7 @@
-import 'package:isurus/lib/models/account_status.dart';
-import 'package:isurus_pro/isurus/lib/models/transaction.dart';
+import 'package:bank_app/models/account_status.dart';
+import 'package:bank_app/models/transaction.dart';
 
-import 'package:'
+
 
 abstract class Account {
   final String accountNumber;

@@ -11,7 +11,7 @@ class MainApp extends StatelessWidget { //essa classe que estou criando é um wi
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: Text('Isurus'),
         ),
       ),
     );
