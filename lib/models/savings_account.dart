@@ -1,22 +1,13 @@
-import 'package:bank_app/models/account.dart';
+import 'account.dart';
+import '../core/enums/account_status.dart';
 
-class SavingsAccount extends Account {
-  double interestRate;
+class SavingsConta extends Conta {
+  double cash;
 
-  SavingsAccount({
-    required String accountNumber,
-    required double balance,
-    required DateTime openDate,
-    required this.interestRate,
-  }) : super(
-          accountNumber: accountNumber,
-          balance: balance,
-          openDate: openDate,
-        );
+  SavingsConta(String contaNumber, ContaStatus status, this.cash)
+      : super(contaNumber, status);
 
-  void applyInterest() {
-    balance += balance * interestRate;
+  void aplicacoes() {
+    // Lógica de aplicação futura
   }
 }
-
-

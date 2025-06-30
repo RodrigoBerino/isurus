@@ -1,26 +1,9 @@
-import 'package:bank_app/models/account.dart';
+import 'account.dart';
+import '../core/enums/account_status.dart';
 
-class CheckingAccount extends Account {
+class CheckingConta extends Conta {
   double overdraftLimit;
 
-  CheckingAccount({
-    required String accountNumber,
-    required double balance,
-    required DateTime openDate,
-    required this.overdraftLimit,
-  }) : super(
-          accountNumber: accountNumber,
-          balance: balance,
-          openDate: openDate,
-        );
-
-  @override
-  void withdraw(double amount) {
-    if (amount > 0 && (balance + overdraftLimit) >= amount) {
-      balance -= amount;
-    } else {
-      // Handle insufficient funds
-      print('Insufficient funds, even with overdraft limit.');
-    }
-  }
+  CheckingConta(String contaNumber, ContaStatus status, this.overdraftLimit)
+      : super(contaNumber, status);
 }

@@ -1,18 +1,19 @@
-import 'package:bank_app/database/database_helper.dart';
-import 'package:bank_app/models/card.dart';
+import '../models/card.dart';
 
 class CardService {
-  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final List<CardModel> _cards = [];
 
-  Future<void> addCard(Card card) async {
-    await _dbHelper.insertCard(card);
+  void addCard(CardModel card) {
+    _cards.add(card);
   }
 
-  Future<List<Card>> getCardsByCustomerId(String customerId) async {
-    return await _dbHelper.getCardsByCustomerId(customerId);
+  void activateCard(String cardNumber) {
+    _cards.firstWhere((c) => c.cardNumber == cardNumber).activate();
   }
 
-  Future<void> updateCardStatus(Card card) async {
-    await _dbHelper.updateCard(card);
+  void blockCard(String cardNumber) {
+    _cards.firstWhere((c) => c.cardNumber == cardNumber).block();
   }
+
+  List<CardModel> getAll() => _cards;
 }

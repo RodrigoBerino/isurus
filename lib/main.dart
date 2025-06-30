@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:bank_app/screens/login_screen.dart';
+import 'services/customer_service.dart';
+import 'screens/login_screen.dart';
 
 void main() {
-  runApp(BankApp());
+  final customerService = CustomerService();
+  runApp(MyApp(customerService: customerService));
 }
 
-class BankApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  final CustomerService customerService;
+
+  const MyApp({required this.customerService, super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bank App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: LoginScreen(),
-      debugShowCheckedModeBanner: false,
+      title: 'Banco Isurus',
+      home: LoginScreen(customerService: customerService),
     );
   }
 }
-

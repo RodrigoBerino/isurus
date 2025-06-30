@@ -1,14 +1,11 @@
-import 'package:bank_app/database/database_helper.dart';
-import 'package:bank_app/models/transaction.dart';
+import '../models/transaction.dart';
 
 class TransactionService {
-  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final List<Transaction> _transactions = [];
 
-  Future<void> addTransaction(Transaction transaction) async {
-    await _dbHelper.insertTransaction(transaction);
+  void recordTransaction(Transaction transaction) {
+    _transactions.add(transaction);
   }
 
-  Future<List<Transaction>> getTransactionsByAccountNumber(String accountNumber) async {
-    return await _dbHelper.getTransactionsByAccountNumber(accountNumber);
-  }
+  List<Transaction> getAll() => _transactions;
 }

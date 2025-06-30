@@ -1,45 +1,24 @@
-import 'package:bank_app/models/account_status.dart';
+import '../core/enums/account_status.dart';
+import 'transaction.dart';
 
-abstract class Account {
-  final String accountNumber;
-  double balance;
-  final DateTime openDate;
-  AccountStatus status;
+abstract class Conta {
+  final String contaNumber;
+  ContaStatus status;
+  double balance = 0.0;
+  List<Transaction> transactions = [];
 
-  Account({
-    required this.accountNumber,
-    required this.balance,
-    required this.openDate,
-    this.status = AccountStatus.active,
-  });
+  Conta(this.contaNumber, this.status);
 
   void deposit(double amount) {
-    if (amount > 0) {
-      balance += amount;
-    }
+    balance += amount;
+    transactions.add(Transaction.deposit(amount, 'Depósito'));
   }
 
-  void withdraw(double amount) {
-    if (amount > 0 && balance >= amount) {
+  void transfer(Conta toConta, double amount) {
+    if (balance >= amount) {
       balance -= amount;
+      toConta.deposit(amount);
+      transactions.add(Transaction.transfer(amount, 'Transferência'));
     }
-  }
-
-  void transfer(Account toAccount, double amount) {
-    if (amount > 0 && balance >= amount) {
-      balance -= amount;
-      toAccount.balance += amount;
-    }
-  }
-
-  double getBalance() => balance;
-
-  Map<String, dynamic> toMap() {
-    return {
-      'accountNumber': accountNumber,
-      'balance': balance,
-      'openDate': openDate.toIso8601String(),
-      'status': status.toString().split('.').last,
-    };
   }
 }

@@ -1,15 +1,15 @@
-# Isuru - 
+# Isurus
 
 Um aplicativo bancário completo desenvolvido em Flutter e Dart, seguindo arquitetura orientada a objetos e baseado em diagrama UML.
 
 # Funcionalidades
 
-- ✅ Registro e login de clientes
-- ✅ Criação e gerenciamento de contas (corrente e poupança)
-- ✅ Depósito, saque e transferência entre contas
-- ✅ Visualização de extrato bancário
-- ✅ Geração e gerenciamento de cartões (crédito, débito, múltiplo)
-- ✅ Contratação e pagamento de empréstimos
+- Registro e login de clientes
+- Criação e gerenciamento de contas (corrente e poupança)
+- Depósito, saque e transferência entre contas
+- Visualização de extrato bancário
+- Geração e gerenciamento de cartões (crédito, débito, múltiplo)
+- Contratação e pagamento de empréstimos
 
 # Arquitetura
 
@@ -88,14 +88,6 @@ flutter run
 - [ ] Integração com APIs externas
 - [ ] Modo offline
 
-## 📄 Licença
+## Licença
 
-Este projeto é desenvolvido para fins educacionais e demonstração de conceitos de desenvolvimento mobile.
-
-## 👥 Contribuição
-
-Contribuições são bem-vindas! Por favor, abra uma issue ou pull request para sugestões e melhorias.
-
----
-
-Desenvolvido com ❤️ usando Flutter
+Este projeto é desenvolvido para fins de desenvolvimento mobile.

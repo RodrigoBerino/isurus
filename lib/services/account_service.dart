@@ -1,40 +1,27 @@
-import 'package:bank_app/database/database_helper.dart';
-import 'package:bank_app/models/account.dart';
-import 'package:bank_app/models/checking_account.dart';
-import 'package:bank_app/models/savings_account.dart';
+import '../models/account.dart';
+import '../models/transaction.dart';
 
-class AccountService {
-  final DatabaseHelper _dbHelper = DatabaseHelper();
+class ContaService {
+  final List<Conta> _contas = [];
 
-  Future<void> createAccount(Account account, String customerId) async {
-    await _dbHelper.insertAccount(account, customerId);
+  void addConta(Conta conta) {
+    _contas.add(conta);
   }
 
-  Future<List<Account>> getAccountsByCustomerId(String customerId) async {
-    return await _dbHelper.getAccountsByCustomerId(customerId);
+  void deposit(String contaNumber, double value) {
+    final conta = _contas.firstWhere((c) => c.contaNumber == contaNumber);
+    conta.deposit(value);
   }
 
-  Future<void> updateAccount(Account account) async {
-    await _dbHelper.updateAccount(account);
+  void transfer(String fromNumber, String toNumber, double value) {
+    final from = _contas.firstWhere((c) => c.contaNumber == fromNumber);
+    final to = _contas.firstWhere((c) => c.contaNumber == toNumber);
+    from.transfer(to, value);
   }
 
-  Future<void> deleteAccount(String accountNumber) async {
-    await _dbHelper.deleteAccount(accountNumber);
+  List<Transaction> getTransactions(String contaNumber) {
+    return _contas.firstWhere((c) => c.contaNumber == contaNumber).transactions;
   }
 
-  Future<void> deposit(Account account, double amount) async {
-    account.deposit(amount);
-    await _dbHelper.updateAccount(account);
-  }
-
-  Future<void> withdraw(Account account, double amount) async {
-    account.withdraw(amount);
-    await _dbHelper.updateAccount(account);
-  }
-
-  Future<void> transfer(Account fromAccount, Account toAccount, double amount) async {
-    fromAccount.transfer(toAccount, amount);
-    await _dbHelper.updateAccount(fromAccount);
-    await _dbHelper.updateAccount(toAccount);
-  }
+  List<Conta> getAll() => _contas;
 }
