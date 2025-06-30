@@ -1,7 +1,4 @@
 import 'package:bank_app/models/account_status.dart';
-import 'package:bank_app/models/transaction.dart';
-
-
 
 abstract class Account {
   final String accountNumber;
@@ -37,8 +34,12 @@ abstract class Account {
 
   double getBalance() => balance;
 
-  // This will be implemented later with database integration
-  List<Transaction> getStatement() => [];
+  Map<String, dynamic> toMap() {
+    return {
+      'accountNumber': accountNumber,
+      'balance': balance,
+      'openDate': openDate.toIso8601String(),
+      'status': status.toString().split('.').last,
+    };
+  }
 }
-
-

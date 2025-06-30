@@ -1,46 +1,101 @@
-# Isurus
+# Isuru - 
 
-Isurus Project é um aplicativo de streaming de vídeo desenvolvido em Flutter e Dart. Seu principal objetivo é criar uma plataforma de mídia com foco em uma arquitetura robusta, escalável, modular, testável e orientada a objetos, seguindo princípios como Clean Architecture.
+Um aplicativo bancário completo desenvolvido em Flutter e Dart, seguindo arquitetura orientada a objetos e baseado em diagrama UML.
 
-## Estrutura do Projeto
+# Funcionalidades
 
-O código é organizado em uma estrutura de pastas clara:
+- ✅ Registro e login de clientes
+- ✅ Criação e gerenciamento de contas (corrente e poupança)
+- ✅ Depósito, saque e transferência entre contas
+- ✅ Visualização de extrato bancário
+- ✅ Geração e gerenciamento de cartões (crédito, débito, múltiplo)
+- ✅ Contratação e pagamento de empréstimos
 
-* **`app/`**: Configurações centrais, widgets globais e ponto de entrada.
-* **`features/`**: Cada funcionalidade principal (autenticação, home, player) é um módulo separado, contendo suas próprias camadas:
-    * **`data/`**: Modelos, fontes de dados (API, local) e implementações de repositórios.
-    * **`domain/`**: Lógica de negócios pura, com entidades, contratos de repositórios e casos de uso.
-    * **`presentation/`**: UI (telas, widgets) e gerenciamento de estado (Cubit/BLoC, etc.).
-* **`core/`** (opcional): Lógica compartilhada como tratamento de erros.
-* **`injection_container.dart`**: Para injeção de dependência.
+# Arquitetura
 
-## Princípios de POO
+O projeto segue uma arquitetura em camadas:
 
-O projeto aplica ativamente encapsulamento, abstração, herança, polimorfismo e os cinco princípios S.O.L.I.D. para garantir um código limpo e de fácil manutenção.
+```
+lib/
+├── models/          # Modelos de dados e enums
+├── services/        # Lógica de negócio
+├── screens/         # Telas da interface
+├── database/        # Persistência SQLite
+├── widgets/         # Componentes reutilizáveis
+└── main.dart        # Ponto de entrada
+```
 
-## Como Começar
+# Tecnologias
 
-1.  **Pré-requisitos**: Flutter SDK.
-2.  Clone o repositório.
-3.  Instale as dependências (`flutter pub get`).
-4.  (Opcional) Configure variáveis de ambiente/chaves de API.
-5.  Execute o aplicativo (`flutter run`).
+- **Flutter** - Framework de desenvolvimento
+- **Dart** - Linguagem de programação
+- **SQLite** - Banco de dados local
+- **Crypto** - Hash de senhas
+- **UUID** - Identificadores únicos
 
-## Funcionalidades Planejadas (Exemplos)
+# Telas
 
-Autenticação, home com destaques/categorias, player de vídeo, busca, detalhes de mídia, favoritos, histórico e perfil.
+1. **Login/Cadastro** - Autenticação de usuários
+2. **Dashboard** - Painel principal com resumo
+3. **Contas** - Gerenciamento de contas bancárias
+4. **Extrato** - Histórico de transações
+5. **Cartões** - Gerenciamento de cartões
+6. **Empréstimos** - Solicitação e pagamento
 
-## Tecnologias Chave
+# Como Executar
 
-* **Linguagem**: Dart, **Framework**: Flutter.
-* **Gerenciamento de Estado**: (a definir: BLoC/Cubit, Provider, etc.).
-* **Navegação**: (a definir).
-* **Requisições HTTP**: `http` ou `dio`.
-* **Injeção de Dependência**: `get_it`.
-* Outros pacotes para tratamento de resultados, player de vídeo, armazenamento local, etc.
+### Pré-requisitos
+- Flutter SDK
+- Dart SDK
+- Emulador ou dispositivo físico
 
-## Contribuições
+### Instalação
+```bash
+# Clone o repositório
+git clone <repository-url>
 
-São bem-vindas, seguindo o fluxo padrão de Fork, Branch, Commit, Push e Pull Request.
+# Navegue até o diretório
+cd bank_app
 
-## Licença
+# Instale as dependências
+flutter pub get
+
+# Execute o aplicativo
+flutter run
+```
+
+## Banco de Dados
+
+### Tabelas
+- `tbl_customers` - Dados dos clientes
+- `tbl_accounts` - Contas bancárias
+- `tbl_transactions` - Histórico de transações
+- `tbl_cards` - Cartões bancários
+- `tbl_loans` - Empréstimos
+
+##  Segurança
+
+- Hash SHA-256 para senhas
+- Validação de dados de entrada
+- Controle de acesso por sessão
+- Verificação de integridade
+
+##  Melhorias Futuras
+
+- [ ] Notificações push
+- [ ] Autenticação biométrica
+- [ ] Relatórios e gráficos
+- [ ] Integração com APIs externas
+- [ ] Modo offline
+
+## 📄 Licença
+
+Este projeto é desenvolvido para fins educacionais e demonstração de conceitos de desenvolvimento mobile.
+
+## 👥 Contribuição
+
+Contribuições são bem-vindas! Por favor, abra uma issue ou pull request para sugestões e melhorias.
+
+---
+
+Desenvolvido com ❤️ usando Flutter

@@ -76,5 +76,3 @@ class Customer {
     required this.passwordHash,
   });
 }
-
-

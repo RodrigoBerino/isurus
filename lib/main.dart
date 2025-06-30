@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:bank_app/screens/login_screen.dart';
+
 void main() {
-  runApp(const MainApp());
+  runApp(BankApp());
 }
 
-class MainApp extends StatelessWidget { //essa classe que estou criando é um widget
-  const MainApp({super.key});
-
+class BankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Isurus'),
-        ),
+    return MaterialApp(
+      title: 'Bank App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
+

@@ -1,4 +1,3 @@
-
 import 'package:bank_app/models/account.dart';
 
 class SavingsAccount extends Account {

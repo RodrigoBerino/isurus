@@ -1,0 +1,145 @@
+@startuml
+allowmixing
+title Banco Isurus
+
+skinparam classAttributeIconSize 0
+hide empty members
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam linetype ortho
+
+' === CLASSES DO SISTEMA ===
+class Bank {
+  - bankName: String
+  + addCustomer(customer: Customer): void
+  + createConta(customer: Customer, type: ContaType): Conta
+}
+
+class Customer {
+  - customerId: ID
+  - name: String
+  - document: String
+  - address: String
+  - email: String
+  - passwordHash: String
+  + login(email: String, password: String): boolean
+  + updateProfile(): void
+  + viewContas(): List
+}
+
+abstract class Conta {
+  # ContaNumber: String
+  # status: ContaStatus
+  + deposit(amount: double): void
+  + transfer(toConta: Conta, amount: double): void
+}
+
+protocol CheckingLimit extends Conta {
+  - overdraftLimit: double
+}
+
+protocol Wallet extends Conta {
+  - cash: float
+  + aplicacoes(): void
+}
+
+class Transaction {
+  - transactionId: ID
+  - date: DateTime
+  - quantity: double
+  - type: TransactionType
+  - description: String
+}
+
+class Card {
+  - cardNumber: String
+  - expirationDate: String
+  - cvv: String
+  - cardType: CardType
+  - status: CardStatus
+  + activate(): void
+  + block(): void
+}
+
+' === ENTIDADES DO BANCO DE DADOS ===
+class "tbl_customers" <<entity>> {
+  + id: ID
+  + name: String
+  + document: String
+  + email: String
+  + address: String
+  + password_hash: String
+}
+
+class "tbl_Conta" <<entity>> {
+  + id: String
+  + customer_id: UUID
+  + balance: double
+  + open_date: Date
+  + status: String
+  + type: String
+}
+
+class "tbl_transactions" <<entity>> {
+  + id: ID
+  + Conta_id: String
+  + date: DateTime
+  + quantity: double
+  + type: String
+  + description: String
+}
+
+class "tbl_cards" <<entity>> {
+  + id: String
+  + Conta_id: String
+  + customer_id: UUID
+  + expiration_date: String
+  + cvv: String
+  + card_type: String
+  + status: String
+}
+
+' === ENUMS ===
+enum ContaStatus {
+  ACTIVE
+  CLOSED
+  FROZEN
+}
+
+enum TransactionType {
+  DEPOSIT
+  TRANSFER
+  PAYMENT
+}
+
+enum CardType {
+  DEBIT
+  CREDIT
+  MULTIPLE
+}
+
+enum CardStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+' === RELACIONAMENTOS ENTRE CLASSES ===
+Bank "1" *-- "1..*" Customer : "tem"
+Customer "1" *-- "1..*" Conta : "possui"
+Conta "1" *-- "0..*" Transaction : "registra"
+Conta <|-- CheckingConta
+Conta <|-- SavingsConta
+Customer "1" -- "0..*" Card : "titular de"
+Conta --> ContaStatus
+Transaction --> TransactionType
+Card --> CardType
+Card --> CardStatus
+
+' === RELACIONAMENTOS COM O BANCO DE DADOS ===
+Customer ..> "tbl_customers" : persiste em
+Conta ..> "tbl_Contas" : persiste em
+Transaction ..> "tbl_transactions" : persiste em
+Card ..> "tbl_cards" : persiste em
+
+@enduml
